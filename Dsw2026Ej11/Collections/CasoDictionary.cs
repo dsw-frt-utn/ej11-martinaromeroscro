@@ -1,4 +1,6 @@
-﻿namespace Dsw2026Ej11.Collections;
+﻿using Dsw2026Ej11.Domain;
+
+namespace Dsw2026Ej11.Collections;
 
 //Crear un diccionario donde la clave sea el legajo y el valor el alumno
 //Incluir un método para agregar un alumno al diccionario
@@ -7,4 +9,28 @@
 //Incluir un método para eliminar un alumno utilizando la clave
 public class CasoDictionary
 {
+    Dictionary<int, Alumno> alumnos = new Dictionary<int, Alumno>();
+
+
+    public void agregarAlumno(Alumno alumno, int legajo)
+    {
+        alumnos.Add(legajo, alumno);
+    }
+
+    public Alumno buscarAlumno(int legajo)
+    {
+        return alumnos[legajo];
+    }
+
+
+    public Dictionary<int, Alumno> retornarDiccionario()
+    {
+        return alumnos;
+    }
+
+    public void eliminarAlumno(int legajo)
+    {
+        alumnos.Remove(legajo);
+    }
 }
+

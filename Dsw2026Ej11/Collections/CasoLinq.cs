@@ -1,4 +1,7 @@
-﻿namespace Dsw2026Ej11.Collections;
+﻿using Dsw2026Ej11.Domain;
+using System.Security.Cryptography.X509Certificates;
+
+namespace Dsw2026Ej11.Collections;
 
 /*
  * Para cada punto crear un método que permita:
@@ -16,4 +19,67 @@
  */
 public class CasoLinq
 {
+    public static Libro GetPrimero()
+    {
+        return Libro.CrearLista().First();
+    }
+
+
+    public static Libro GetUltimo()
+    {
+        return Libro.CrearLista().Last();
+    }
+
+    public static decimal GetTotalPrecio()
+    {
+        decimal total = 0;
+        Libro.CrearLista().ForEach(libro => { total = libro.Precio + total; });
+        return total;
+    }
+
+    public static decimal GetPromedioPrecios()
+    {
+        decimal total = 0;
+        Libro.CrearLista().ForEach(libro => { total = libro.Precio + total; });
+        return total / Libro.CrearLista().Count();
+    }
+
+    public static List<Libro> GetListById()
+    {
+        return Libro.CrearLista().Where(p => p.Id >= 15).ToList();
+
+    }
+
+    public static List<string> GetLibros()
+    {
+        List<string> list = new List<string>();
+        Libro.CrearLista().ForEach(libro => { list.Add($"titulo: {libro.Titulo}, precio: {libro.Precio}$") });
+        return list;
+    }
+
+    public static decimal GetMayorPrecio()
+    {
+        return Libro.CrearLista().OrderBy(p => p.Precio >= p.Precio).First().Precio;
+    }
+
+    public static decimal GetMenorPrecio()
+    {
+        return Libro.CrearLista().OrderBy(p => p.Precio >= p.Precio).Last().Precio;
+    }
+
+    public static List<Libro> GetMayorPromedio()
+    {
+        CasoLinq.GetPromedioPrecios();
+
+        return Libro.CrearLista().Where(p => p.Precio >= CasoLinq.GetPromedioPrecios()).ToList();
+
+
+    }
+
+    public static List<Libro> Ordenar()
+    {
+        return Libro.CrearLista().OrderByDescending(p => p.Titulo).ToList();
+
+    }
 }
+
